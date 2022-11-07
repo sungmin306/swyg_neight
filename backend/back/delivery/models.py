@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
+
 
 class Post(models.Model):
     title = models.CharField(null = False, max_length=100) #제목
@@ -13,7 +15,7 @@ class Post(models.Model):
     content =  models.CharField(max_length = 500 ) # 본문 내용
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    #user = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE, default = '')
+    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, default = '')
 
     def __str__(self):
         return self.title
