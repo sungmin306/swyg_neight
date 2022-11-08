@@ -34,7 +34,7 @@ from collections import OrderedDict # 페이지 분할해서  request
 #         return Response(serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
 
 class PostPageNumberPagination(PageNumberPagination):
-    page_size = 3
+    page_size = 20
     def get_paginated_response(self, data):
         return Response(OrderedDict([
             ('postList', data),
@@ -43,8 +43,8 @@ class PostPageNumberPagination(PageNumberPagination):
         ]))
 
 class PostViewset(viewsets.ModelViewSet):
-    authentication_classes=[BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    authentication_classes=[BasicAuthentication, SessionAuthentication] # 권한
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly] # 권한
     queryset = Post.objects.all()
     pagination_class = PostPageNumberPagination
     serializer_class = PostSerializer
