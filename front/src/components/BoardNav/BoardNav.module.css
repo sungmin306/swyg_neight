@@ -1,0 +1,26 @@
+.container {
+        display: flex;
+        justify-content: center;
+}
+
+.logo {
+        position: relative;
+        height: 130px;
+        top: -20px;
+}
+
+button {
+        background-color: #A9D5FD;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 105px;
+        height: 60px;
+        margin: 20px 30px 50px 30px;
+        font-weight: bold;
+        cursor: pointer;
+}
+
+button:nth-child(5) {
+        width: 130px;
+}

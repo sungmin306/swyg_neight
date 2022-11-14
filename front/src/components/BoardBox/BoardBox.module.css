@@ -1,0 +1,41 @@
+a:link {
+  text-decoration: none;
+  color: #223263;
+}
+
+.boxContainer {
+  display: flex;
+  margin: 20px 50px;
+}
+
+.icon {
+  color: #41a4ff;
+}
+
+.container {
+  border: 1px solid #ebf0ff;
+  width: 330px;
+  height: 165px;
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.storeAndPlatform,
+.num,
+.time,
+.location {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.title {
+  color: #949494;
+  margin-right: 30px;
+}
+
+.value {
+  color: #223263;
+}
