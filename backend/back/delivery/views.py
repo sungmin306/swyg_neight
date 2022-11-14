@@ -34,7 +34,7 @@ from collections import OrderedDict # 페이지 분할해서  request
 #         return Response(serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
 
 class PostPageNumberPagination(PageNumberPagination):
-    page_size = 20
+    page_size = 6
     def get_paginated_response(self, data):
         return Response(OrderedDict([
             ('postList', data),

@@ -13,7 +13,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class BlogPageNumberPagination(PageNumberPagination):
-    page_size = 20
+    page_size = 6
     def get_paginated_response(self, data):
         return Response(OrderedDict([
             ('postList', data),
