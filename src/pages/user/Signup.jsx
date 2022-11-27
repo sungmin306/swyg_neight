@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 // css
 import styled from "styled-components";
@@ -20,10 +21,7 @@ function Signup() {
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
-  const [inputHome, setHome] = useState("");
-  const [inputHomeNum, setHomeNum] = useState("");
-  // const [inputBank, setBankName] = useState("");
-  // const [inputBankNum, setBankNum] = useState("");
+  const navigate = useNavigate();
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
@@ -31,7 +29,6 @@ function Signup() {
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
-    // console.log(e.target.value)
   };
 
   const handleInputPw = (e) => {
@@ -42,22 +39,6 @@ function Signup() {
     setConfirmPw(e.target.value);
   };
 
-  const handleInputHome = (e) => {
-    setHome(e.target.value);
-  };
-
-  const handleInputHomeNum = (e) => {
-    setHomeNum(e.target.value);
-  };
-
-  // const handleInputBank = (e) => {
-  //   setBankName(e.target.value);
-  // };
-
-  // const handleInputBankNum = (e) => {
-  //   setBankNum(e.target.value);
-  // };
-
   // 회원가입 버튼 클릭 이벤트 (비밀번호와 비밀번호 확인 일치 여부)
   const onSubmit = (e) => {
     e.preventDefault();
@@ -66,21 +47,28 @@ function Signup() {
       return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
     } else {
       axios
-        .post("http://127.0.0.1:8000/rest-auth/registration/", {
-          Username: inputName,
-          Email: inputId,
-          Password1: inputPw,
-          Password2: confirmPw,
+        .post(
+          "https://sungmin.pythonanywhere.com/account/rest-auth/registration/",
+          {
+            username: inputName,
+            email: inputId,
+            password1: inputPw,
+            password2: confirmPw,
+          }
+        )
+        .then(function (response) {
+          if (parseInt(response.status / 200) == 1) {
+            alert("회원가입 성공");
+            navigate("/delivery-board");
+          }
         })
         .then(function (response) {
-          if (response.status >= 200 && response.status < 300) {
-            alert("회원가입 성공");
-            return true;
+          if (response.ACCESS_TOKEN) {
+            localStorage.setItem("loing-token", response.ACESS_TOKEN);
           }
         })
         .catch(function (error) {
-          alert("오류");
-          return false;
+          alert(error);
         });
     }
   };
@@ -96,6 +84,7 @@ function Signup() {
               type="email"
               placeholder="이메일을 입력해주세요."
               onChange={handleInputId}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -104,6 +93,7 @@ function Signup() {
               type="password"
               placeholder="비밀번호를 입력해주세요."
               onChange={handleInputPw}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -112,6 +102,7 @@ function Signup() {
               type="password"
               placeholder="비밀번호를 다시 한 번 입력해주세요."
               onChange={handleConfirmPw}
+              required
             />
             <Form.Group className="mb-3">
               <CustomLable>닉네임</CustomLable>
@@ -123,7 +114,7 @@ function Signup() {
             </Form.Group>
           </Form.Group>
           <CustomButton type="submit" onClick={onSubmit}>
-            로그인
+            회원가입
           </CustomButton>
         </Form>
       </Card.Body>

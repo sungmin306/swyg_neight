@@ -50,6 +50,8 @@ export default Header;
 
 // styled-components
 const NavbarWrap = styled(Navbar)`
+  font-size: 13px;
+  font-weight: 500;
   background-color: #c4e0fb;
-  height: 10%;
+  height: 6vh;
 `;

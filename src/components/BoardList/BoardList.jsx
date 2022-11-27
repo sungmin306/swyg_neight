@@ -79,4 +79,5 @@ const CustomButton = styled(Button)`
   font-size: 14px;
   font-weight: bold;
   height: 15%;
+  width: 160px;
 `;

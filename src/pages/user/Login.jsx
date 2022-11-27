@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+// api
+import useApis from "services/apis/userApis";
+
+// zustand
+import { user } from "store/index";
 
 // css
 import styled from "styled-components";
@@ -18,6 +24,13 @@ import {
 function Login() {
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
+  const navigate = useNavigate();
+
+  // zustand
+  const { thisUser, userLogin } = user((state) => state);
+
+  // 세션에 id 저장 관리
+  const [savedId, setSavedId] = useState(false);
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -33,19 +46,28 @@ function Login() {
     console.log("click login");
     console.log(inputId, inputPw);
 
-    axios
-      .post("http://127.0.0.1:8000/rest-auth/login", {
-        Email: inputId,
-        Password: inputPw,
-      })
+    axios({
+      url: "https://sungmin.pythonanywhere.com/account/rest-auth/login",
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        email: inputId,
+        password: inputPw,
+      },
+    })
       // 서버에서 보내준 결과값이 response
       .then(function (response) {
-        alert("로그인 성공");
-        return true;
+        if (parseInt(response.status / 200) == 1) {
+          alert("로그인 성공");
+          localStorage.setItem("login-token", response.data.token);
+          console.log(response.data.token);
+          navigate("/delivery-board");
+        }
       })
       .catch(function (error) {
         alert("로그인 실패");
-        return false;
       });
   };
 
@@ -74,6 +96,7 @@ function Login() {
             로그인
           </CustomButton>
         </Form>
+        <CustomSignupButton>회원가입</CustomSignupButton>
       </Card.Body>
     </LoginWrap>
   );
@@ -110,4 +133,8 @@ const CustomButton = styled(Button)`
   :hover {
     background-color: #77aada;
   }
+`;
+
+const CustomSignupButton = styled.div`
+  font-size: 12px;
 `;

@@ -8,13 +8,13 @@ import Header from "layouts/Header";
 import StartPage from "pages/StartPage";
 
 // 로그인, 회원가입 페이지
-import Login from "pages/Login";
-import Signup from "pages/Signup";
+import Login from "pages/user/Login";
+import Signup from "pages/user/Signup";
 
 // 공동배달 페이지
-import DeliveryBoard from "pages/DeliveryBoard";
-import DeliveryRegister from "pages/DeliveryRegister";
-import DeliveryDetail from "pages/DeliveryDetail";
+import DeliveryBoard from "pages/delivery/DeliveryBoard";
+import DeliveryRegister from "pages/delivery/DeliveryRegister";
+import DeliveryDetail from "pages/delivery/DeliveryDetail";
 
 function MainRoute() {
   return (

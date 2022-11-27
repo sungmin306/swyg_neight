@@ -23,5 +23,6 @@ const ImgWrap = styled.div`
 `;
 
 const LogImg = styled.img`
-  width: 600px;
+  width: 35vw;
+  height: 35vw;
 `;
