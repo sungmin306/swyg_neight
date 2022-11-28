@@ -42,7 +42,7 @@ const MenuFilter = (props) => {
       menu.style.backgroundColor = "#4c9be6";
     }
 
-    props.getId(e.target.id);
+    props.getId(parseInt(e.target.id));
   };
 
   useEffect(() => {});
