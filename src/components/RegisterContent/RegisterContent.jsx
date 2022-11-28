@@ -35,7 +35,7 @@ const RegisterContent = (props) => {
 
   const getId = (id) => {
     setCategory(id);
-    console.log(id);
+    console.log(id, typeof id);
   };
 
   const handleButtonClick = () => {
@@ -54,6 +54,7 @@ const RegisterContent = (props) => {
         place: place,
         food_category: category,
         content: content,
+        kakaourl: kakaoUrl,
       },
     })
       .then(function (response) {
