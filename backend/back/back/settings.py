@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    'django_filters',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
     'rest_auth',
 
     'allauth.socialaccount',
-
+    #react 연동
     'corsheaders',
 
     #myapp
@@ -102,6 +103,8 @@ JWT_AUTH = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',     # react 연동
+    'django.middleware.common.CommonMiddleware', # react 연동
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,7 +114,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000')
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000',
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'back.urls'
